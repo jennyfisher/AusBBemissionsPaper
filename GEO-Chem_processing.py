@@ -20,7 +20,7 @@ NDAC_folder = '/NDACC/wollongong/CO/'
 TCCON_file= '/TCCON/Darwin_TCCON.nc'
 
 # Assuming GEOS_Chem files are in 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/GFED_2008.nc' folders/files
-GEOS_Chem_folder = '/short/m19/mjd574/GC/rundirs/'
+GEOS_Chem_folder = '/GC/rundirs/'
 			
 
 g = 9.8                            
