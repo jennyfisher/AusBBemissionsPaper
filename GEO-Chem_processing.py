@@ -16,6 +16,11 @@ from pyhdf.SD import SD, SDC
 ####################################
 ####################################
 
+NDAC_folder = '/NDACC/wollongong/CO/'
+TCCON_file= '/TCCON/Darwin_TCCON.nc'
+
+# Assuming GEOS_Chem files are in 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/GFED_2008.nc' folders/files
+GEOS_Chem_folder = '/short/m19/mjd574/GC/rundirs/'
 			
 
 g = 9.8                            
@@ -81,7 +86,7 @@ for Year in ['2008','2209','2010']:
 				print("processing NDACC data")
 
 				#Select hdf files
-				dataset3 = SD('/home/574/mjd574/NDACC/'+Station+'/'+Tracer+'/fts_'+Tracer+'_'+Station[:4]+'_'+Year+'.hdf', SDC.READ)
+				dataset3 = SD(NDAC_folder+'fts_CO_woll_'+Year+'.hdf', SDC.READ)
 				nd_times = dataset3.select('DATETIME')[:]
 	
 
@@ -149,7 +154,7 @@ for Year in ['2008','2209','2010']:
 			if TCCON:
 				print("processing TCCON data")
 				#select the file
-				dataset3 = Dataset('Darwin_TCCON.nc')
+				dataset3 = Dataset(TCCON_file)
 				nd_times = dataset3.variables['time'][:]
 				nd_aprtimes = dataset3.variables['prior_date'][:]
 
@@ -246,10 +251,10 @@ for Year in ['2008','2209','2010']:
 			#[time,lev,lat,lon]
 			print("Processing GEOS-Chem data")
 			#select GC File(s)
-			dataset1 = MFDataset('/short/m19/mjd574/GC/rundirs/geos5_2x25_tropchem_'+Inventory+'/'+Year+'/'+Inventory+'_'+Year+'.nc')
+			dataset1 = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_'+Inventory+'/'+Year+'/'+Inventory+'_'+Year+'.nc')
 			if Inventory=='QFED':
-				dataset5 = MFDataset('/short/m19/mjd574/GC/rundirs/geos5_2x25_tropchem_QFED/'+Year+'/QFED_emissions/coards.'+Year+'*.nc')
-			dataset4 = MFDataset('/short/m19/mjd574/GC/rundirs/geos5_2x25_tropchem_'+Inventory+'/'+Year+'/'+Station.capitalize()+'.nc')
+				dataset5 = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_QFED/'+Year+'/QFED_emissions/coards.'+Year+'*.nc')
+			dataset4 = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_'+Inventory+'/'+Year+'/'+Station.capitalize()+'.nc')
 
 			####################################
 			#Monthly work
@@ -294,7 +299,7 @@ for Year in ['2008','2209','2010']:
 			gc_molec_vert_avg = gc_vmr_vert_avg*1E-9*NAIR		# Convert to vmr to C/
 
 			#Compare to ref model (here GFED4s)
-			dataset_ref = MFDataset('/short/m19/mjd574/GC/rundirs/geos5_2x25_tropchem_GFED/'+Year+'/GFED_'+Year+'.nc')
+			dataset_ref = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_GFED/'+Year+'/GFED_'+Year+'.nc')
 			gc_vmr_ref=dataset_ref.variables[gc_field][:]
 			gc_vmr_ref_surf = gc_vmr_ref[:,0,:,:]			
 			gc_vmr_ref_surf_map = np.mean(gc_vmr_ref_surf, axis=(0))
