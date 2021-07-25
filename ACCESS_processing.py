@@ -15,6 +15,13 @@ from pyhdf.SD import SD, SDC
 ####################################
 ####################################
 
+NDAC_folder = '/NDACC/wollongong/CO/'
+TCCON_file= '/TCCON/Darwin_TCCON.nc'
+
+# Assuming ACCESS_UKCA files are in '/ACCESS/output/vaoab/vaoaba.pm-2008-*.nc"' folder/files
+ACCESS_folder = "/ACCESS/output/vaoab/'
+
+
 g = 9.8                            # m/simport matplotlib.colors as colors
 NAv = 6.0221415e+23		   # Avogadro number
 MWair = 28.9644                    # g/mole
@@ -23,11 +30,8 @@ H = (8.314*240)/(28.9644E-03*9.8)
 pcol_const = (NAv* 10)/(MWair*g)     # scaling factor for turning vmr into pcol (using hPa levels)
 
 
-Station = 'darwin'
 Tracer = 'co'				
 Inventory = 'GFED'
-path = 'vaoab'
-if Tracer == 'co':
 MWtracer = 28.01
 field = 'field34010'
 
@@ -43,7 +47,7 @@ field = 'field34010'
 
 for Year in ['2008,'2009','2010']:
 	for Station in ['wollongong', 'Darwin', 'capegrim', 'capefergusson']:
-		print('Processing '+Year+' '+Tracer+' '+Inventory+' at '+Station)
+		print('Processing '+Year+' at '+Station)
 
 		####################################
 		####################################
@@ -75,7 +79,7 @@ for Year in ['2008,'2009','2010']:
 			print("processing NDACC data")
 
 			#Select hdf files
-			dataset3 = SD('/home/574/mjd574/NDACC/'+Station+'/'+Tracer+'/fts_'+Tracer+'_'+Station[:4]+'_'+Year+'.hdf', SDC.READ)
+			dataset3 = SD(NDAC_folder+'fts_CO_woll_'+Year+'.hdf', SDC.READ)
 			nd_times = dataset3.select('DATETIME')[:]
 	
 
@@ -139,7 +143,7 @@ for Year in ['2008,'2009','2010']:
 		if TCCON:
 			print("processing TCCON data")
 			#select the file
-			dataset3 = Dataset('Darwin_TCCON.nc')
+			dataset3 = Dataset(TCCON_file)
 			nd_times = dataset3.variables['time'][:]
 			nd_aprtimes = dataset3.variables['prior_date'][:]
 
@@ -237,7 +241,7 @@ for Year in ['2008,'2009','2010']:
 		print("Processing ACCESS data")
 
 		#Select ACCESS Files(s)
-		dataset2 = MFDataset("/g/data1/p66/akl599/ACCESS/output/"+path+"/"+path+"a.pm-"+Year+"-*.nc")
+		dataset2 = MFDataset(ACCESS_folder+"vaoaba.pm-"+Year+"-*.nc")
 
 		#extract ACCESS data
 		ac_times=dataset2.variables['time'][:]
