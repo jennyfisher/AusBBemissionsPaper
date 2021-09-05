@@ -21,7 +21,6 @@ TCCON_file= '/TCCON/Darwin_TCCON.nc'
 
 # Assuming GEOS_Chem files are in e.g. 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/GFED_2008.nc' folders/files
 # and station files are in e.g. 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/Wollongong.nc' folder/files
-# and QFED emissions are in 'GC/rundirs/geos5_2x25_tropchem_QFED/208/QFED_emissions/coards.2008.nc'
 
 GEOS_Chem_folder = '/GC/rundirs/'
 			
@@ -255,8 +254,6 @@ for Year in ['2008','2209','2010']:
 			print("Processing GEOS-Chem data")
 			#select GC File(s)
 			dataset1 = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_'+Inventory+'/'+Year+'/'+Inventory+'_'+Year+'.nc')
-			if Inventory=='QFED':
-				dataset5 = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_QFED/'+Year+'/QFED_emissions/coards.'+Year+'*.nc')
 			dataset4 = MFDataset(GEOS_Chem_folder+'geos5_2x25_tropchem_'+Inventory+'/'+Year+'/'+Station.capitalize()+'.nc')
 
 			####################################
@@ -270,10 +267,8 @@ for Year in ['2008','2209','2010']:
 			gc_area=dataset1.variables['DXYP__DXYP'][:]		# Extract grid column surface area
 			gc_vmr=dataset1.variables[gc_field][:]			# Extract volume mixing ratios
 			
-			if Inventory != 'QFED':
-				gc_bbemission=dataset1.variables[gc_field2][:]	# Extract fire emission (C atoms per m^2 per second)
-			if Inventory == 'QFED':
-				gc_bbemission=dataset5.variables[gc_field2][:]
+			gc_bbemission=dataset1.variables[gc_field2][:]	# Extract fire emission (C atoms per m^2 per second)
+			
 
 			#Create long / lat grid
 			gc_lon = np.arange(-181.25,181.25,2.5)			# Create grid edges for longitudes (res 2.5 deg)
