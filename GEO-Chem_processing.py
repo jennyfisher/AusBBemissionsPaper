@@ -19,7 +19,10 @@ from pyhdf.SD import SD, SDC
 NDAC_folder = '/NDACC/wollongong/CO/'
 TCCON_file= '/TCCON/Darwin_TCCON.nc'
 
-# Assuming GEOS_Chem files are in 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/GFED_2008.nc' folders/files
+# Assuming GEOS_Chem files are in e.g. 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/GFED_2008.nc' folders/files
+# and station files are in e.g. 'GC/rundirs/geos5_2x25_tropchem_GFED/2008/Wollongong.nc' folder/files
+# and QFED emissions are in 'GC/rundirs/geos5_2x25_tropchem_QFED/208/QFED_emissions/coards.2008.nc'
+
 GEOS_Chem_folder = '/GC/rundirs/'
 			
 
