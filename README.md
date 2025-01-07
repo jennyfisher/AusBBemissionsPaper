@@ -1,5 +1,5 @@
 # AusBBemissionsPaper
-Analysis scripts and model input files to accompany Desservettaz et al. (2021)
+Analysis scripts and model input files to accompany Desservettaz et al. (2022), doi: 10.1029/2021JD035925
 
 ## Files
 - ACCESS_Darwin\*.bash are scripts used to extract the ACCESS-UKCA surface CO mixing ratio at Darwin an (if needed) regrid to GEOS-Chem resolution.
