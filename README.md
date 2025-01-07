@@ -9,4 +9,4 @@ Analysis scripts and model input files to accompany Desservettaz et al. (2022), 
 - GEOS-Chem_processing.py is a scrpt to process the GEOS-Chem netcdf converted output files (including station files) and compare against total column datasets (rescalling, and applying of averaging kernels and aprioris). Folders paths have to be parameterised at the top of the script. The script output csv files.
 - ACCESS_processing.py is a scrpt to process the ACCESS_UKCA netcdf converted output files (including station files) and compare against total column datasets (rescalling, and applying of averaging kernels and aprioris). Folders paths have to be parameterised at the top of the script. The script output csv files.
 
-Note: The GEOS-Chem restart file was too large to include in this Github repository and can be obtained by contacting the authors.
+Note: The GEOS-Chem restart file was too large to include in this Github repository but can be obtained using release v1.0.1.
